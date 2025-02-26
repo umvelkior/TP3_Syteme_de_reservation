@@ -1,5 +1,6 @@
 <?php
 include 'connect_to_SQL.php';
+include '../connection.html';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nom = $_POST['nom'];
@@ -25,32 +26,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Inscription</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <div class="container">
-        <h2>Inscription</h2>
-        <form action="register.php" method="POST">
-            <div class="form-group">
-                <label for="nom">Nom :</label>
-                <input type="text" class="form-control" id="nom" name="nom" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email :</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="mot_de_passe">Mot de passe :</label>
-                <input type="password" class="form-control" id="mot_de_passe" name="mot_de_passe" required>
-            </div>
-            <button type="submit" class="btn btn-primary">S'inscrire</button>
-        </form>
-    </div>
-</body>
-</html>
