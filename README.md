@@ -3,7 +3,7 @@
 **Titre**: TP3_reservation
 **Nombre de Tables**: 2
 
-## Table 1 - Utilisateur
+## Table 1 - Utilisateurs
 
 - id
 - pseudo
@@ -14,8 +14,8 @@
 CREATE TABLE utilisateurs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     pseudo VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL
-    mdp VARCHAR(255) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    mdp VARCHAR(255) NOT NULL
 );
 ```
 
@@ -29,7 +29,7 @@ CREATE TABLE utilisateurs (
 - commentaire
 
 ```sql
-CREATE TABLE rendezvous (
+CREATE TABLE rdv (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     jour DATE NOT NULL,
