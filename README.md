@@ -1,9 +1,9 @@
-#Base de donnée
+# Base de donnée
 
 **Titre**: TP3_reservation
 **Nombre de Tables**: 2
 
-##Table 1 - Utilisateur
+## Table 1 - Utilisateur
 
 - id
 - pseudo
@@ -19,7 +19,7 @@ CREATE TABLE utilisateurs (
 );
 ```
 
-##Table 2 - RDV
+## Table 2 - RDV
 
 - id
 - id de l'utilisateur
