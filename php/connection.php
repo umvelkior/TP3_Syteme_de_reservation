@@ -3,9 +3,9 @@ include 'connect_to_SQL.php';
 include '../connection.html';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nom = $_POST['nom'];
+    $pseudo = $_POST['pseudo'];
     $email = $_POST['email'];
-    $mot_de_passe = password_hash($_POST['mot_de_passe'], PASSWORD_DEFAULT);
+    $mdp = password_hash($_POST['mdp'], PASSWORD_DEFAULT);
 
     // Vérification de l'unicité de l'email
     $stmt = $conn->prepare("SELECT * FROM utilisateurs WHERE email = ?");
@@ -17,8 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Cet email est déjà utilisé.";
     } else {
         // Insertion des données
-        $stmt = $conn->prepare("INSERT INTO utilisateurs (nom, email, mot_de_passe) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $nom, $email, $mot_de_passe);
+        $stmt = $conn->prepare("INSERT INTO utilisateurs (pseudo, email, mdp) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $pseudo, $email, $mdp);
         $stmt->execute();
         echo "Inscription réussie !";
     }
