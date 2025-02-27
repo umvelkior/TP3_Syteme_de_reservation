@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($user && password_verify($mdp, $user['mdp'])) {
         $_SESSION['user_id'] = $user['id'];
-        header("Location: ../profile.html");
+        header("Location: profil.php");
     } 
     else {
         echo "Email ou mot de passe incorrect.";

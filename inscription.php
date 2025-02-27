@@ -1,6 +1,6 @@
 <?php
 include 'connect_to_SQL.php';
-include '../connection.html';
+include 'connection.html';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nom = $_POST['nom'];
