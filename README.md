@@ -6,14 +6,20 @@
 ## Table 1 - Utilisateurs
 
 - id
-- pseudo
+- nom
+- prénom
+- date de naissance
+- num de tel
 - email
 - mdp
 
 ```sql
 CREATE TABLE utilisateurs (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    pseudo VARCHAR(100) NOT NULL,
+    nom VARCHAR(100) NOT NULL,
+    prenom VARCHAR(100) NOT NULL,
+    date_de_naissance DATE,
+    numero_telephone VARCHAR(15),
     email VARCHAR(100) UNIQUE NOT NULL,
     mdp VARCHAR(255) NOT NULL
 );

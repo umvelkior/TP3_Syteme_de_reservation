@@ -11,14 +11,26 @@
         <form action="php/inscription.php" method="POST">
             <div class="form-group">
                 <label for="nom">Nom :</label>
-                <input type="text" class="form-control" id="pseudo" name="pseudo" required>
+                <input type="text" class="form-control" id="nom" name="nom" required>
+            </div>
+            <div class="form-group">
+                <label for="prenom">Prénom :</label>
+                <input type="text" class="form-control" id="prenom" name="prenom" required>
+            </div>
+            <div class="form-group">
+                <label for="date_de_naissance">Date de naissance :</label>
+                <input type="date" class="form-control" id="date_de_naissance" name="date_de_naissance" required>
+            </div>
+            <div class="form-group">
+                <label for="numero_telephone">Numéro de téléphone :</label>
+                <input type="tel" class="form-control" id="numero_telephone" name="numero_telephone" required>
             </div>
             <div class="form-group">
                 <label for="email">Email :</label>
                 <input type="email" class="form-control" id="email" name="email" required>
             </div>
             <div class="form-group">
-                <label for="mot_de_passe">Mot de passe :</label>
+                <label for="mdp">Mot de passe :</label>
                 <input type="password" class="form-control" id="mdp" name="mdp" required>
             </div>
             <button type="submit" class="btn btn-primary">S'inscrire</button>
@@ -33,7 +45,7 @@
                 <input type="email" class="form-control" id="email" name="email" required>
             </div>
             <div class="form-group">
-                <label for="mot_de_passe">Mot de passe :</label>
+                <label for="mdp">Mot de passe :</label>
                 <input type="password" class="form-control" id="mdp" name="mdp" required>
             </div>
             <button type="submit" class="btn btn-primary">Se connecter</button>
