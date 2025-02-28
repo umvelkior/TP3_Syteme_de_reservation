@@ -23,46 +23,36 @@ $rendezvous = $result->fetch_all(MYSQLI_ASSOC);
     <meta charset="UTF-8">
     <title>Calendrier des Rendez-vous</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css' rel='stylesheet' />
     <style>
-        .calendar {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
-        }
-        .day {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-        }
-        .event {
-            background-color: #f0ad4e;
-            padding: 5px;
-            margin: 5px 0;
-            border-radius: 5px;
+        #calendar {
+            max-width: 1100px;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1 class="my-4">Calendrier des Rendez-vous</h1>
-        <div class="calendar">
-            <?php
-            $daysOfWeek = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
-            foreach ($daysOfWeek as $day) {
-                echo "<div class='day'><strong>$day</strong></div>";
-            }
-
-            // Afficher les rendez-vous
-            foreach ($rendezvous as $rdv) {
-                $date = new DateTime($rdv['jour']);
-                $dayOfWeek = $date->format('N') - 1; // 0 pour Lundi, 6 pour Dimanche
-                $dayCell = "<div class='day'>" . $date->format('d/m/Y') . "<br>";
-                $dayCell .= "<div class='event'>" . $rdv['heure'] . " - " . $rdv['commentaire'] . "</div>";
-                $dayCell .= "</div>";
-                echo str_repeat("<div class='day'></div>", $dayOfWeek) . $dayCell;
-            }
-            ?>
-        </div>
+        <div id='calendar'></div>
     </div>
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js'></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: [
+                    <?php foreach ($rendezvous as $rdv) {
+                        $date = $rdv['jour'] . 'T' . $rdv['heure'];
+                        echo "{ title: '" . htmlspecialchars($rdv['commentaire'], ENT_QUOTES, 'UTF-8') . "', start: '" . $date . "' },";
+                    } ?>
+                ],
+                locale: 'fr'
+            });
+            calendar.render();
+        });
+    </script>
 </body>
 </html>
