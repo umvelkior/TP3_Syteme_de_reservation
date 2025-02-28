@@ -9,7 +9,6 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Récupérer les rendez-vous de l'utilisateur
 $stmt = $conn->prepare("SELECT * FROM rdv WHERE user_id = ? ORDER BY jour, heure");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
