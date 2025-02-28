@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $date_de_naissance = $_POST['date_de_naissance'];
     $numero_telephone = $_POST['numero_telephone'];
 
-    // Vérification de l'unicité de l'email
+
     $stmt = $conn->prepare("SELECT * FROM utilisateurs WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -18,8 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         echo "Cet email est déjà utilisé.";
-    } else {
-        // Insertion des données
+    } 
+    else 
+    {
         $stmt = $conn->prepare("INSERT INTO utilisateurs (nom, prenom, date_de_naissance, numero_telephone, email, mdp) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssss", $nom, $prenom, $date_de_naissance, $numero_telephone, $email, $mdp);
         $stmt->execute();

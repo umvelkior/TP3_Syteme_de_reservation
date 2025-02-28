@@ -3,7 +3,8 @@ include 'connect_to_SQL.php';
 include 'connection.html';
 session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+ {
     $email = $_POST['email'];
     $mdp = $_POST['mdp'];
 
@@ -17,7 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['user_id'] = $user['id'];
         header("Location: profil.php");
     } 
-    else {
+    else 
+    {
         echo "Email ou mot de passe incorrect.";
     }
 

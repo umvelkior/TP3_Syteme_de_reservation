@@ -1,6 +1,5 @@
 <?php
 include 'connect_to_SQL.php';
-include 'reservation.html';
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -9,7 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $heure = $_POST['heure'];
     $commentaire = $_POST['commentaire'];
 
-    // Vérification de la disponibilité du créneau horaire
     $stmt = $conn->prepare("SELECT * FROM rdv WHERE jour = ? AND heure = ?");
     $stmt->bind_param("ss", $jour, $heure);
     $stmt->execute();
@@ -17,13 +15,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         echo "Ce créneau horaire est déjà pris.";
-    } else {
-        // Enregistrement du rendez-vous
+    } 
+    else {
         $stmt = $conn->prepare("INSERT INTO rdv (user_id, jour, heure, commentaire) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("isss", $user_id, $jour, $heure, $commentaire);
         $stmt->execute();
         echo "Rendez-vous enregistré !";
-        //header("Location: reservation.php");
+        header("Location: calendrier.php");
     }
 
     $stmt->close();

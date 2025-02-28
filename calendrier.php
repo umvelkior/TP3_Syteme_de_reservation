@@ -47,27 +47,9 @@ $rendezvous = $result->fetch_all(MYSQLI_ASSOC);
                     </li>
                     <li class="nav-item">
                         <div class="container">
-                            <a class="nav-link" href="reservation.php">
-                                <div class="column">
-                                    <p class="d-flex justify-content-center nav-lien">Réserver</p>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div class="container">
                             <a class="nav-link" href="calendrier.php">
                                 <div class="column">
                                     <p class="d-flex justify-content-center nav-lien">Calendrier</p>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div class="container">
-                            <a class="nav-link" href="suppression_reservation.php">
-                                <div class="column">
-                                    <p class="d-flex justify-content-center nav-lien">Gérer mes rendez-vous</p>
                                 </div>
                             </a>
                         </div>
@@ -77,13 +59,96 @@ $rendezvous = $result->fetch_all(MYSQLI_ASSOC);
         </nav>
     </header>
     <main>
-    <div class="container">
-        <h1 class="my-4">Calendrier des Rendez-vous</h1>
-        <div id='calendar'></div>
-    </div>
+    <section class="container-fluid">
+        <nav aria-label="...">
+            <ul class="pagination pagination-lg d-flex justify-content-center">
+                <li class="page-item" aria-current="page">
+                    <a class="page-link" href="#"  onclick="showContainerbis('rdv_container')">Réserver</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#" onclick="showContainerbis('liste_container')">Supprimer</a>
+                </li>
+            </ul>
+        </nav>
+
+        <section class="container" id="rdv_container">
+            <div class="container">
+            <h1 class="my-4">Prendre un Rendez-vous</h1>
+            <?php
+            session_start();
+            if (!isset($_SESSION['user_id'])) {
+                header("Location: connection.html");
+                exit();
+            }
+            ?>
+            <form action="reservation.php" method="POST">
+                <div class="form-group">
+                    <label for="jour">Date</label>
+                    <input type="date" class="form-control" id="jour" name="jour" required>
+                </div>
+                <div class="form-group">
+                    <label for="heure">Heure PT</label>
+                    <select class="form-control" id="heure" name="heure" required>
+                        <?php
+                        for ($h = 8; $h < 18; $h++) {
+                            for ($m = 0; $m < 60; $m += 30) {
+                                $heure = sprintf("%02d:%02d", $h, $m);
+                                echo "<option value=\"$heure\">$heure</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="commentaire">Commentaire</label>
+                    <textarea class="form-control" id="commentaire" name="commentaire" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Prendre Rendez-vous</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="container " id="liste_container"></section>
+        <div class="container">
+            <h1 class="my-4">Liste des Rendez-vous</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Heure</th>
+                        <th>Commentaire</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($rendezvous as $rdv) { ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($rdv['jour']); ?></td>
+                            <td><?php echo htmlspecialchars($rdv['heure']); ?></td>
+                            <td><?php echo htmlspecialchars($rdv['commentaire']); ?></td>
+                            <td>
+                                <form method="POST" action="suppression_reservation.php" style="display:inline;">
+                                    <input type="hidden" name="delete_id" value="<?php echo $rdv['id']; ?>">
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce rendez-vous ?');">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    </section>
+    <section class="container" id="calendrier_container"></section>
+        <div class="container">
+            <h1 class="my-4">Calendrier des Rendez-vous</h1>
+            <div id='calendar'></div>
+        </div>
+    </section>
     </main>
 
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js'></script>
+    <script src='js/script.js'></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');

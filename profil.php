@@ -16,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $date_de_naissance = $_POST['date_de_naissance'];
     $numero_telephone = $_POST['numero_telephone'];
 
-    // Vérification de l'unicité de l'email
     $stmt = $conn->prepare("SELECT * FROM utilisateurs WHERE email = ? AND id != ?");
     $stmt->bind_param("si", $email, $user_id);
     $stmt->execute();
@@ -24,8 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         echo "Cet email est déjà utilisé.";
-    } else {
-        // Mise à jour des informations
+    } 
+    else 
+    {
         $stmt = $conn->prepare("UPDATE utilisateurs SET nom = ?, prenom = ?, date_de_naissance = ?, numero_telephone = ?, email = ? WHERE id = ?");
         $stmt->bind_param("sssssi", $nom, $prenom, $date_de_naissance, $numero_telephone, $email, $user_id);
         $stmt->execute();
