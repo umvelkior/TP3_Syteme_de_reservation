@@ -35,6 +35,51 @@ if (isset($_POST['delete_id'])) {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                <li class="nav-item">
+                        <div class="container">
+                            <a class="nav-link" href="profil.php">
+                                <div class="column">
+                                    <p class="d-flex justify-content-center nav-lien">Profil</p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="container">
+                            <a class="nav-link" href="reservation.php">
+                                <div class="column">
+                                    <p class="d-flex justify-content-center nav-lien">Réserver</p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="container">
+                            <a class="nav-link" href="calendrier.php">
+                                <div class="column">
+                                    <p class="d-flex justify-content-center nav-lien">Calendrier</p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="container">
+                            <a class="nav-link" href="suppression_reservation.php">
+                                <div class="column">
+                                    <p class="d-flex justify-content-center nav-lien">Gérer mes rendez-vous</p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
     <div class="container">
         <h1 class="my-4">Liste des Rendez-vous</h1>
         <table class="table table-striped">
@@ -63,5 +108,6 @@ if (isset($_POST['delete_id'])) {
             </tbody>
         </table>
     </div>
+    </main>
 </body>
 </html>
